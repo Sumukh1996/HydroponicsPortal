@@ -45,14 +45,14 @@ class DefaultAside extends Component {
               <i className="icon-list"></i>
             </NavLink>
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <NavLink className={classNames({ active: this.state.activeTab === '2' })}
                      onClick={() => {
                        this.toggle('2');
                      }}>
               <i className="icon-speech"></i>
             </NavLink>
-          </NavItem>
+          </NavItem> */}
           <NavItem>
             <NavLink className={classNames({ active: this.state.activeTab === '3' })}
                      onClick={() => {
@@ -147,7 +147,7 @@ class DefaultAside extends Component {
                 </div>
               </ListGroupItem>
             </ListGroup>
-          </TabPane>
+          {/* </TabPane>
           <TabPane tabId="2" className="p-3">
             <div className="message">
               <div className="py-3 pb-5 mr-3 float-left">
@@ -165,8 +165,8 @@ class DefaultAside extends Component {
                 tempor incididunt...
               </small>
             </div>
-            <hr />
-            <div className="message">
+            <hr /> */}
+            {/* <div className="message">
               <div className="py-3 pb-5 mr-3 float-left">
                 <div className="avatar">
                   <img src={'assets/img/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
@@ -232,7 +232,7 @@ class DefaultAside extends Component {
               <small className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt...
               </small>
-            </div>
+            </div> */}
           </TabPane>
           <TabPane tabId="3" className="p-3">
             <h6>Settings</h6>

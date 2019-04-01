@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Progress } from 'reactstrap';
+import {  Alert, Card, CardBody, CardHeader, Progress } from 'reactstrap';
+
 
 class ProgressBar extends Component {
+
+  constructor(props) {
+      super(props);
+      this.state = {hover : false};
+  }
+
+  handleMouseEnter = () => {
+    this.setState({hover : true});
+  }
+
+  handleMouseExit = () =>{
+    this.setState({hover : false});
+  }
+
+  // let tooltipStyle = {
+  //   display: this.state.hover ? 'block' : 'none'
+  // }
 
   render() {
     return (
@@ -43,7 +61,15 @@ class ProgressBar extends Component {
           </CardHeader>
           <CardBody>
             <Progress value={2 * 5} className="mb-3" />
-            <Progress color="success" value="25" className="mb-3" />
+            <Progress color="success" value="25" className="mb-3" onMouseEnter={this.handleMouseEnter.bind(this)} onMouseLeave = {this.handleMouseExit.bind(this)} />
+            <div>
+              {/* <div style = {{display: this.state.hover ? 'block' : 'none'}}>
+              This is the tool tip
+              </div> */}
+              <Alert color = "primary" style = {{display : this.state.hover ? 'block' : 'none'}}>
+                New form of Alert
+              </Alert>
+            </div>
             <Progress color="info" value={50} className="mb-3" />
             <Progress color="warning" value={75} className="mb-3" />
             <Progress color="danger" value="100" className="mb-3" />
