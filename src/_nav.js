@@ -4,14 +4,14 @@ export default {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
+      // badge: {
+      //   variant: 'info',
+      //   text: 'NEW',
+      // },
     },
     {
       title: true,
-      name: 'Theme',
+      name: 'Plant Data',
       wrapper: {            // optional wrapper object
         element: '',        // required valid HTML5 element tag
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
@@ -30,7 +30,7 @@ export default {
     },
     {
       title: true,
-      name: 'Components',
+      name: 'IoT Sensor Data',
       wrapper: {
         element: '',
         attributes: {},
@@ -216,10 +216,10 @@ export default {
       name: 'Widgets',
       url: '/widgets',
       icon: 'icon-calculator',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
+      // badge: {
+      //   variant: 'info',
+      //   text: 'NEW',
+      // },
     },
     {
       divider: true,
@@ -255,26 +255,26 @@ export default {
         },
       ],
     },
-    {
-      name: 'Disabled',
-      url: '/dashboard',
-      icon: 'icon-ban',
-      attributes: { disabled: true },
-    },
-    {
-      name: 'Download CoreUI',
-      url: 'https://coreui.io/react/',
-      icon: 'icon-cloud-download',
-      class: 'mt-auto',
-      variant: 'success',
-      attributes: { target: '_blank', rel: "noopener" },
-    },
-    {
-      name: 'Try CoreUI PRO',
-      url: 'https://coreui.io/pro/react/',
-      icon: 'icon-layers',
-      variant: 'danger',
-      attributes: { target: '_blank', rel: "noopener" },
-    },
+    // {
+    //   name: 'Disabled',
+    //   url: '/dashboard',
+    //   icon: 'icon-ban',
+    //   attributes: { disabled: true },
+    // },
+    // {
+    //   name: 'Download CoreUI',
+    //   url: 'https://coreui.io/react/',
+    //   icon: 'icon-cloud-download',
+    //   class: 'mt-auto',
+    //   variant: 'success',
+    //   attributes: { target: '_blank', rel: "noopener" },
+    // },
+    // {
+    //   name: 'Try CoreUI PRO',
+    //   url: 'https://coreui.io/pro/react/',
+    //   icon: 'icon-layers',
+    //   variant: 'danger',
+    //   attributes: { target: '_blank', rel: "noopener" },
+    // },
   ],
 };

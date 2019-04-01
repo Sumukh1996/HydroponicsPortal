@@ -1,4 +1,4 @@
-import React, { Component, lazy, Suspense } from 'react';
+import React, { Component } from 'react'; //Removed 'Suspense' and 'lazy' fom this 
 import { Bar, Line } from 'react-chartjs-2';
 import {
   Badge,
@@ -18,12 +18,12 @@ import {
   DropdownToggle,
   Progress,
   Row,
-  Table,
+  //Table,
 } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
-const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));
+//const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));
 
 const brandPrimary = getStyle('--primary')
 const brandSuccess = getStyle('--success')
@@ -227,60 +227,60 @@ const cardChartOpts4 = {
 };
 
 // Social Box Chart
-const socialBoxData = [
-  { data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook' },
-  { data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter' },
-  { data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin' },
-  { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' },
-];
+// const socialBoxData = [
+//   { data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook' },
+//   { data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter' },
+//   { data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin' },
+//   { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' },
+// ];
 
-const makeSocialBoxData = (dataSetNo) => {
-  const dataset = socialBoxData[dataSetNo];
-  const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        backgroundColor: 'rgba(255,255,255,.1)',
-        borderColor: 'rgba(255,255,255,.55)',
-        pointHoverBackgroundColor: '#fff',
-        borderWidth: 2,
-        data: dataset.data,
-        label: dataset.label,
-      },
-    ],
-  };
-  return () => data;
-};
+// const makeSocialBoxData = (dataSetNo) => {
+//   const dataset = socialBoxData[dataSetNo];
+//   const data = {
+//     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+//     datasets: [
+//       {
+//         backgroundColor: 'rgba(255,255,255,.1)',
+//         borderColor: 'rgba(255,255,255,.55)',
+//         pointHoverBackgroundColor: '#fff',
+//         borderWidth: 2,
+//         data: dataset.data,
+//         label: dataset.label,
+//       },
+//     ],
+//   };
+//   return () => data;
+// };
 
-const socialChartOpts = {
-  tooltips: {
-    enabled: false,
-    custom: CustomTooltips
-  },
-  responsive: true,
-  maintainAspectRatio: false,
-  legend: {
-    display: false,
-  },
-  scales: {
-    xAxes: [
-      {
-        display: false,
-      }],
-    yAxes: [
-      {
-        display: false,
-      }],
-  },
-  elements: {
-    point: {
-      radius: 0,
-      hitRadius: 10,
-      hoverRadius: 4,
-      hoverBorderWidth: 3,
-    },
-  },
-};
+// const socialChartOpts = {
+//   tooltips: {
+//     enabled: false,
+//     custom: CustomTooltips
+//   },
+//   responsive: true,
+//   maintainAspectRatio: false,
+//   legend: {
+//     display: false,
+//   },
+//   scales: {
+//     xAxes: [
+//       {
+//         display: false,
+//       }],
+//     yAxes: [
+//       {
+//         display: false,
+//       }],
+//   },
+//   elements: {
+//     point: {
+//       radius: 0,
+//       hitRadius: 10,
+//       hoverRadius: 4,
+//       hoverBorderWidth: 3,
+//     },
+//   },
+// };
 
 // sparkline charts
 const sparkLineChartData = [
@@ -462,7 +462,9 @@ class Dashboard extends Component {
     this.state = {
       dropdownOpen: false,
       radioSelected: 2,
+      date: new Date().toLocaleDateString(),
     };
+    
   }
 
   toggle() {
@@ -501,7 +503,7 @@ class Dashboard extends Component {
                   </ButtonDropdown>
                 </ButtonGroup>
                 <div className="text-value">9.823</div>
-                <div>Members online</div>
+                <div>Plants Available</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Line data={cardChartData2} options={cardChartOpts2} height={70} />
@@ -509,7 +511,7 @@ class Dashboard extends Component {
             </Card>
           </Col>
 
-          <Col xs="12" sm="6" lg="3">
+          {/* <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-primary">
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
@@ -531,10 +533,10 @@ class Dashboard extends Component {
                 <Line data={cardChartData1} options={cardChartOpts1} height={70} />
               </div>
             </Card>
-          </Col>
+          </Col> */}
 
           <Col xs="12" sm="6" lg="3">
-            <Card className="text-white bg-warning">
+            <Card className="text-white bg-success">
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
                   <Dropdown id='card3' isOpen={this.state.card3} toggle={() => { this.setState({ card3: !this.state.card3 }); }}>
@@ -549,9 +551,9 @@ class Dashboard extends Component {
                   </Dropdown>
                 </ButtonGroup>
                 <div className="text-value">9.823</div>
-                <div>Members online</div>
+                <div>Plants Alive</div>
               </CardBody>
-              <div className="chart-wrapper" style={{ height: '70px' }}>
+              <div className="chart-wrapper" style={{ height: '70px'}}>
                 <Line data={cardChartData3} options={cardChartOpts3} height={70} />
               </div>
             </Card>
@@ -573,7 +575,7 @@ class Dashboard extends Component {
                   </ButtonDropdown>
                 </ButtonGroup>
                 <div className="text-value">9.823</div>
-                <div>Members online</div>
+                <div>Plants Dead</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
@@ -587,8 +589,8 @@ class Dashboard extends Component {
               <CardBody>
                 <Row>
                   <Col sm="5">
-                    <CardTitle className="mb-0">Traffic</CardTitle>
-                    <div className="small text-muted">November 2015</div>
+                    <CardTitle className="mb-0">Number of Plants</CardTitle>
+                    <div className="small text-muted">{this.state.date}</div>
                   </Col>
                   <Col sm="7" className="d-none d-sm-inline-block">
                     <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button>
@@ -638,7 +640,7 @@ class Dashboard extends Component {
           </Col>
         </Row>
 
-        <Row>
+        {/* <Row>
           <Col xs="6" sm="6" lg="3">
             <Suspense fallback={this.loading()}>
               <Widget03 dataBox={() => ({ variant: 'facebook', friends: '89k', feeds: '459' })} >
@@ -678,7 +680,7 @@ class Dashboard extends Component {
               </Widget03>
             </Suspense>
           </Col>
-        </Row>
+        </Row> */}
 
         <Row>
           <Col>
@@ -844,7 +846,7 @@ class Dashboard extends Component {
                           <Progress className="progress-xs" color="warning" value="37" />
                         </div>
                       </div>
-                      <div className="progress-group">
+                      {/* <div className="progress-group">
                         <div className="progress-group-header">
                           <i className="icon-globe progress-group-icon"></i>
                           <span className="title">Organic Search</span>
@@ -883,7 +885,7 @@ class Dashboard extends Component {
                         <div className="progress-group-bars">
                           <Progress className="progress-xs" color="success" value="8" />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="divider text-center">
                         <Button color="link" size="sm" className="text-muted" data-toggle="tooltip" data-placement="top"
                                 title="" data-original-title="show more"><i className="icon-options"></i></Button>
@@ -892,7 +894,7 @@ class Dashboard extends Component {
                   </Col>
                 </Row>
                 <br />
-                <Table hover responsive className="table-outline mb-0 d-none d-sm-table">
+                {/* <Table hover responsive className="table-outline mb-0 d-none d-sm-table">
                   <thead className="thead-light">
                   <tr>
                     <th className="text-center"><i className="icon-people"></i></th>
@@ -1116,7 +1118,7 @@ class Dashboard extends Component {
                     </td>
                   </tr>
                   </tbody>
-                </Table>
+                </Table> */}
               </CardBody>
             </Card>
           </Col>
