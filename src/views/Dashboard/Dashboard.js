@@ -231,19 +231,19 @@ const cardChartOpts4 = {
 const sparkLineChartData = [
   {
     data: [35, 23, 56, 22, 97, 23, 64],
-    label: 'New Clients',
+    label: 'Median Temperature',
   },
   {
     data: [65, 59, 84, 84, 51, 55, 40],
-    label: 'Recurring Clients',
+    label: 'Median Water Level',
   },
   {
     data: [35, 23, 56, 22, 97, 23, 64],
-    label: 'Pageviews',
+    label: 'Median pH',
   },
   {
     data: [65, 59, 84, 84, 51, 55, 40],
-    label: 'Organic',
+    label: 'median EC',
   },
   {
     data: [78, 81, 80, 45, 34, 12, 40],
@@ -408,17 +408,19 @@ class Dashboard extends Component {
       dropdownOpen: false,
       radioSelected: 2,
       date: new Date().toLocaleDateString(),
-      hover: false,
+      hover: new Array(10).fill(false),
     };
     
   }
 
-  handleMouseEnter = () => {
-    this.setState({hover : true});
+  handleMouseEnter = (hoverId) => {
+    const tempArraystate = this.state.hover.map((element,index) => {return index ===hoverId ? true : element});
+    this.setState({hover : tempArraystate});
   }
 
-  handleMouseLeave = () => {
-    this.setState({hover : false});
+  handleMouseLeave = (hoverId) => {
+    const tempArraystate = this.state.hover.map((element,index) => {return index ===hoverId ? false : element});
+    this.setState({hover : tempArraystate});
   }
 
 
@@ -540,29 +542,19 @@ class Dashboard extends Component {
               <CardFooter>
                 <Row className="text-center">
                   <Col sm={12} md className="mb-sm-2 mb-0">
-                    <div className="text-muted">Visits</div>
-                    <strong>29.703 Users (40%)</strong>
+                    <div className="text-muted">Estimated Yield</div>
+                    <strong>29.703 Tonnes</strong>
                     <Progress className="progress-xs mt-2" color="success" value="40" />
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0 d-md-down-none">
-                    <div className="text-muted">Unique</div>
-                    <strong>24.093 Users (20%)</strong>
+                    <div className="text-muted">Estimated Profit</div>
+                    <strong>24,093 Rupees</strong>
                     <Progress className="progress-xs mt-2" color="info" value="20" />
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0">
-                    <div className="text-muted">Pageviews</div>
-                    <strong>78.706 Views (60%)</strong>
+                    <div className="text-muted">Changes this week</div>
+                    <strong>23% Increase</strong>
                     <Progress className="progress-xs mt-2" color="warning" value="60" />
-                  </Col>
-                  <Col sm={12} md className="mb-sm-2 mb-0">
-                    <div className="text-muted">New Users</div>
-                    <strong>22.123 Users (80%)</strong>
-                    <Progress className="progress-xs mt-2" color="danger" value="80" />
-                  </Col>
-                  <Col sm={12} md className="mb-sm-2 mb-0 d-md-down-none">
-                    <div className="text-muted">Bounce Rate</div>
-                    <strong>Average Rate (40.15%)</strong>
-                    <Progress className="progress-xs mt-2" color="primary" value="40" />
                   </Col>
                 </Row>
               </CardFooter>
@@ -571,9 +563,27 @@ class Dashboard extends Component {
         </Row>
         <Row>
           <Col>
-            <Card>
-              <CardHeader>
-                Traffic {' & '} Sales
+            <Card id="iotcard">
+              <CardHeader style={{display:"flex"}}>
+                  <Col xs="6" md="6">
+                    <div style={{display:"inline-block"}}>IoT Values</div>
+                  </Col>
+                  <Col xs="6" md="6" style={{textAlign:"right",alignSelf:"stretch"}}>
+                    <ButtonDropdown isOpen={this.state.iotcard} toggle={() => { this.setState({ iotcard: !this.state.iotcard }); }}>
+                      <DropdownToggle caret>Basil</DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem>
+                          Stevia
+                        </DropdownItem>
+                        <DropdownItem>
+                          Lettuce
+                        </DropdownItem>
+                        <DropdownItem>
+                          All
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </ButtonDropdown>
+                  </Col>
               </CardHeader>
               <CardBody>
                 <Row>
@@ -581,7 +591,7 @@ class Dashboard extends Component {
                     <Row>
                       <Col sm="6">
                         <div className="callout callout-info">
-                          <small className="text-muted">New Clients</small>
+                          <small className="text-muted">Median Temperature</small>
                           <br />
                           <strong className="h4">9,123</strong>
                           <div className="chart-wrapper">
@@ -589,9 +599,9 @@ class Dashboard extends Component {
                           </div>
                         </div>
                       </Col>
-                      <Col sm="6">
+                    <Col sm="6">
                         <div className="callout callout-danger">
-                          <small className="text-muted">Recurring Clients</small>
+                          <small className="text-muted">Median Water Level</small>
                           <br />
                           <strong className="h4">22,643</strong>
                           <div className="chart-wrapper">
@@ -604,88 +614,91 @@ class Dashboard extends Component {
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
                         <span className="progress-group-text">
-                          Monday
+                        Water Level
                         </span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress color="warning" value= "87" />
-                        <Progress color="info" value="34" />
-                        <Progress color="danger" value="78" />
+                        <Progress color="warning" value="89" onMouseOver={ () => { this.handleMouseEnter(0) } } onMouseLeave={ () => {this.handleMouseLeave(0)}}>89</Progress>
+                        <Alert color = "warning" style = {{display : this.state.hover[0] ? 'block' : 'none'}}>
+                          Sector 23
+                        </Alert>
+                        <Progress color="info" value="83" >83</Progress>
+                        <Progress color="danger" value="76" onMouseOver={ () => { this.handleMouseEnter(1) } } onMouseLeave={ () => {this.handleMouseLeave(1)}}>76</Progress>
+                        <Alert color = "danger" style = {{display : this.state.hover[1] ? 'block' : 'none'}}>
+                          Sector 23
+                        </Alert>
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
                         <span className="progress-group-text">
-                        Tuesday
+                        Environmental temperature
                         </span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress color="warning" value="99" />
-                        <Progress color="info" value="56" />
-                        <Progress color="danger" value="94" />
+                        <Progress color="warning" value="92" onMouseOver={ () => { this.handleMouseEnter(2) } } onMouseLeave={ () => {this.handleMouseLeave(2)}} >92</Progress>
+                        <Alert color = "warning" style = {{display : this.state.hover[2] ? 'block' : 'none'}}>
+                          Sector 23
+                        </Alert>
+                        <Progress color="info" value="81" >81</Progress>
+                        <Progress color="danger" value="67" onMouseOver={ () => { this.handleMouseEnter(3) } } onMouseLeave={ () => {this.handleMouseLeave(3)}}>67</Progress>
+                        <Alert color = "danger" style = {{display : this.state.hover[3] ? 'block' : 'none'}}>
+                          Sector 23
+                        </Alert>
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
                         <span className="progress-group-text">
-                        Wednesday
+                        Median temperature
                         </span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress color="warning" value="89" />
-                        <Progress color="info" value="12" />
-                        <Progress color="danger" value="67" />
+                        <Progress color="warning" value="99" onMouseOver={ () => { this.handleMouseEnter(4) } } onMouseLeave={ () => {this.handleMouseLeave(4)}}>99</Progress>
+                        <Alert color = "warning" style = {{display : this.state.hover[4] ? 'block' : 'none'}}>
+                          Sector 23
+                        </Alert>
+                        <Progress color="info" value="33" >33</Progress>
+                        <Progress color="danger" value="6" onMouseOver={ () => { this.handleMouseEnter(5) } } onMouseLeave={ () => {this.handleMouseLeave(5)}}>6</Progress>
+                        <Alert color = "danger" style = {{display : this.state.hover[5] ? 'block' : 'none'}}>
+                          Sector 23
+                        </Alert>
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
                         <span className="progress-group-text">
-                        Thursday
+                        pH
                         </span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress color="warning" value="22" />
-                        <Progress color="info" value="43" />
-                        <Progress color="danger" value="91" />
+                        <Progress color="warning" value="54" onMouseOver={ () => { this.handleMouseEnter(6) } } onMouseLeave={ () => {this.handleMouseLeave(6)}}>54</Progress>
+                        <Alert color = "warning" style = {{display : this.state.hover[6] ? 'block' : 'none'}}>
+                          Sector 23
+                        </Alert>
+                        <Progress color="info" value="44" >44</Progress>
+                        <Progress color="danger" value="12" onMouseOver={ () => { this.handleMouseEnter(7) } } onMouseLeave={ () => {this.handleMouseLeave(7)}}>12</Progress>
+                        <Alert color = "danger" style = {{display : this.state.hover[7] ? 'block' : 'none'}}>
+                          Sector 23
+                        </Alert>
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
                         <span className="progress-group-text">
-                        Friday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress color="warning" value="99" />
-                        <Progress color="info" value="22" />
-                        <Progress color="danger" value="73" />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Saturday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress color="warning" value="12" />
-                        <Progress color="info" value="53" />
-                        <Progress color="danger" value="82" />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Sunday
+                        Electrical Conductivity
                         </span>
                       </div>
                       <div className="progress-group-bars" width = "300px">
-                        <Progress color="yellow" value="100" onMouseOver={this.handleMouseEnter.bind(this)} onMouseLeave={this.handleMouseLeave.bind(this)} />
-                        <Alert color = "primary" style = {{display : this.state.hover ? 'block' : 'none'}}>
+                        <Progress color="warning" value="100" onMouseOver={ () => { this.handleMouseEnter(8) } } onMouseLeave={ () => {this.handleMouseLeave(8)}} >100</Progress>
+                        <Alert color = "warning" style = {{display : this.state.hover[8] ? 'block' : 'none'}}>
                           Sector 23
                         </Alert>
-                        <Progress color="blue" value="34" />
-                        <Progress color="danger" value="69" />
+                        <Progress color="blue" value="54">54</Progress>
+                        <Progress color="danger" value="23" onMouseOver={ () => {this.handleMouseEnter(9)}} onMouseLeave={() => {this.handleMouseLeave(9)}} >23</Progress>
+                        <Alert color = "danger" style = {{display : this.state.hover[9] ? 'block' : 'none'}}>
+                          Sector 12
+                        </Alert>
                       </div>
                     </div>
                     <div className="legend text-center">
@@ -705,7 +718,7 @@ class Dashboard extends Component {
                     <Row>
                       <Col sm="6">
                         <div className="callout callout-warning">
-                          <small className="text-muted">Pageviews</small>
+                          <small className="text-muted">Median pH</small>
                           <br />
                           <strong className="h4">78,623</strong>
                           <div className="chart-wrapper">
@@ -715,7 +728,7 @@ class Dashboard extends Component {
                       </Col>
                       <Col sm="6">
                         <div className="callout callout-success">
-                          <small className="text-muted">Organic</small>
+                          <small className="text-muted">Median EC</small>
                           <br />
                           <strong className="h4">49,123</strong>
                           <div className="chart-wrapper">
