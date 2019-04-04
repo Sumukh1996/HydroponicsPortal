@@ -32,62 +32,18 @@ const brandInfo = getStyle('--info')
 const brandWarning = getStyle('--warning')
 const brandDanger = getStyle('--danger')
 
-// Card Chart 1
-const cardChartData1 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      backgroundColor: brandPrimary,
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [65, 59, 84, 84, 51, 55, 40],
-    },
-  ],
-};
-
-const cardChartOpts1 = {
-  tooltips: {
-    enabled: false,
-    custom: CustomTooltips
-  },
-  maintainAspectRatio: false,
-  legend: {
-    display: false,
-  },
-  scales: {
-    xAxes: [
-      {
-        gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent',
-        },
-        ticks: {
-          fontSize: 2,
-          fontColor: 'transparent',
-        },
-
-      }],
-    yAxes: [
-      {
-        display: false,
-        ticks: {
-          display: false,
-          min: Math.min.apply(Math, cardChartData1.datasets[0].data) - 5,
-          max: Math.max.apply(Math, cardChartData1.datasets[0].data) + 5,
-        },
-      }],
-  },
-  elements: {
-    line: {
-      borderWidth: 1,
-    },
-    point: {
-      radius: 4,
-      hitRadius: 10,
-      hoverRadius: 4,
-    },
-  }
-}
+// // Card Chart 1
+// const cardChartData1 = {
+//   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+//   datasets: [
+//     {
+//       label: 'My First dataset',
+//       backgroundColor: brandPrimary,
+//       borderColor: 'rgba(255,255,255,.55)',
+//       data: [65, 59, 84, 84, 51, 55, 40],
+//     },
+//   ],
+// };
 
 
 // Card Chart 2
@@ -520,11 +476,11 @@ class Dashboard extends Component {
             <Card>
               <CardBody>
                 <Row>
-                  <Col sm="5">
+                  <Col sm="7" xs="6" md="6">
                     <CardTitle className="mb-0">Number of Plants</CardTitle>
                     <div className="small text-muted">{this.state.date}</div>
                   </Col>
-                  <Col sm="7" className="d-none d-sm-inline-block">
+                  <Col sm="7" xs="6" md="6" className="d-none d-sm-inline-block">
                     <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button>
                     <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
                       <ButtonGroup className="mr-3" aria-label="First group">
